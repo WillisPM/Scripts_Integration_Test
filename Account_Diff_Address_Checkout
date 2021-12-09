@@ -1,0 +1,268 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+driver = webdriver.Chrome("/Users/paulawillis/PycharmProjects/PythonSeleniumTests/drivers/chromedriver")
+#driver.get("https://www.hydraulic-supply.com/")
+driver.get("https://hydsupply-test.epicorcommerce.com/")
+time.sleep(2)
+#----------------------------Guest Checkout--------------------------#
+time.sleep(2)
+#----------------------------ACCOUNT--------------------------#
+#driver.find_element_by_link_text('Hello, Sign in!').click()  #My Account
+#time.sleep(2)
+#driver.find_element_by_id("firstname").send_keys("Marie")#1ST NAME
+#driver.find_element_by_id("lastname").send_keys("Willis")#2ND NAME
+#driver.find_element_by_id("email_address").send_keys("pwillis@interactone.com")  #email
+#driver.find_element_by_id("password").send_keys("Vs1o18G4RhMd") #PASS
+#time.sleep(2)
+#driver.find_element_by_id("confirmation").send_keys("Vs1o18G4RhMd")#CONFIRM PASS
+#driver.find_element_by_css_selector(".form-create-account button").click() #CREATE ACCOUNT Button
+#time.sleep(2)
+#---------------------Sign In---------------------#
+driver.find_element_by_link_text('Hello, Sign in!').click()  #My Account
+time.sleep(2)
+#Account Login
+driver.find_element_by_id("email").send_keys("pwillis@interactone.com")  #email
+driver.find_element_by_id("pass").send_keys("Vs1o18G4RhMd")
+time.sleep(2)
+driver.find_element_by_css_selector(".block-customer-login .block-content button.action.login").click() #Register Button
+time.sleep(2)
+print("Sign in Complete")
+#---------------------Sign In---------------------#
+time.sleep(2)
+#----------------------------ACCOUNT--------------------------#
+time.sleep(2)
+#----------------------------Search Bar--------------------------#
+time.sleep(2)
+driver.find_element_by_id('search').click()
+driver.find_element_by_id('search').send_keys("hose elbow")
+driver.find_element_by_id('search').send_keys(Keys.ENTER)
+time.sleep(6)
+driver.find_element_by_partial_link_text("Crimp").click()
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/2)")
+time.sleep(10)
+driver.find_element_by_partial_link_text("Global TTC 1 & 2 Wire Braid Steel Crimp Fittings, Female O-Ring Face Seal Swivel, 45 deg Elbow").click()
+time.sleep(6)
+# PDP
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/3)")
+time.sleep(6)
+WebDriverWait(driver, 7).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT, '1AA10FRA10'))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.ID, 'qty'))).clear()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.ID, 'qty'))).send_keys("2")
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.ID, 'product-addtocart-button'))).click()
+print("Add Simple Product to cart Complete")
+#----------------------------Search Bar--------------------------#
+time.sleep(6)
+#----------------------------# Continue Shopping then re-Enter shopping cart--------------------------#
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.CLASS_NAME, 'minicart-wrapper '))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT, 'VIEW CART'))).click()
+#----------------------------#Enter shopping cart--------------------------#
+time.sleep(2)
+#----------------------------Add Product to cart (use simple)--------------------------#
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.LINK_TEXT, "ALL PRODUCTS"))).click()
+WebDriverWait(driver,5).until(EC.visibility_of_element_located((By.LINK_TEXT, "Hydraulic Power & Control"))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Power Units'))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Power Unit Accessories'))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Flexible Couplings'))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Hi-Q Coupling Halves, Up To 28.8 HP Rating'))).click()
+#PDP
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/2)")
+time.sleep(2)
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT, 'FC095-1/2-W-1/8K'))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.ID, 'qty'))).clear()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.ID, 'qty'))).send_keys("2")
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.ID, 'product-addtocart-button'))).click()
+print("Add Simple Product to cart Complete")
+time.sleep(2)
+#----------------------------Add Product to cart (use simple)--------------------------#
+time.sleep(2)
+#----------------------------Add Product to cart (use configurable)--------------------------#
+time.sleep(2)
+#----------------------------Add Product to cart (use configurable)--------------------------#
+time.sleep(2)
+#----------------------------#Enter shopping cart--------------------------#
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.CLASS_NAME, 'minicart-wrapper '))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT, 'VIEW CART'))).click()
+time.sleep(3)
+#----------------------------#Enter shopping cart--------------------------#
+time.sleep(3)
+#----------------------------#Edit/add coupon--------------------------#
+driver.find_element_by_css_selector(".checkout-cart-index .zoo-main-content-area .cart-container .cart-discount .block>.title h2").click()
+driver.find_element_by_id("coupon_code").send_keys("22123")
+driver.find_element_by_id("coupon_code").send_keys(Keys.ENTER)
+time.sleep(2)
+#driver.find_element_by_class_name("action apply primary").click()
+time.sleep(2)
+#----------------------------#Edit/add coupon--------------------------#
+time.sleep(2)
+#----------------------------#Check the shipping methods and shipping amount--------------------------#
+driver.find_element_by_id("block-shipping-heading").click()
+driver.find_element_by_name("region_id").send_keys("Ohio")
+driver.find_element_by_name("postcode").send_keys("45241")
+time.sleep(2)
+driver.find_element_by_name("postcode").send_keys(Keys.ENTER)
+time.sleep(8)
+#----------------------------#Check the shipping methods and shipping amount--------------------------#
+time.sleep(2)
+#----------------------------#Edit/Update the product quantities--------------------------#
+time.sleep(2)
+driver.execute_script("window.scrollTo(0,0)")
+driver.find_element_by_css_selector("button.increase.items.items-count").click()
+driver.find_element_by_css_selector("button.increase.items.items-count").click()
+driver.find_element_by_css_selector("button.reduced.items.items-count").click()
+time.sleep(2)
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/3)")
+driver.find_element_by_id("updatecart").click()
+print("Plus Minus Buttons")
+time.sleep(2)
+#driver.find_element_by_class_name("input-text qty").click()
+#driver.find_element_by_class_name("input-text qty").send_keys("1")
+#driver.find_element_by_class_name("input-text qty").send_keys(Keys.ENTER)
+print("QTY field interactoion: Unable to perform in script")
+#time.sleep(2)
+#----------------------------#Edit/Update the product quantities--------------------------#
+time.sleep(12)
+#-------------------------------------------Shipping and Tax Math Check-------------------------------------------#
+SubT = driver.find_element_by_xpath("/html/body/div[1]/main/div/div[2]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/table/tbody/tr[1]/td/span")
+New_SubT = float(SubT.text.replace('$',''))
+print(New_SubT)
+
+Tax = driver.find_element_by_xpath("/html/body/div[1]/main/div/div[2]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/table/tbody/tr[2]/td/span")
+New_Tax = float(Tax.text.replace('$',''))
+print(New_Tax)
+
+num = []
+num.append(New_SubT)
+num.append(New_Tax)
+New_Site = New_SubT + New_Tax
+print(num)
+print(f"{New_Site} is the total")
+time.sleep(6)
+#-------------------------------------------Shipping and Tax Math Check-------------------------------------------#
+time.sleep(2)
+#----------------------------#Remove items from Cart--------------------------#
+time.sleep(2)
+#driver.execute_script("window.scrollTo(0,0)")
+#Single removal
+#driver.find_element_by_css_selector('span.clever-icon-close-1').click()
+#Mass cart dump
+#time.sleep(5)
+#driver.find_element_by_id("empty_cart_button").click() #Clear Shopping Cart
+time.sleep(2)
+#----------------------------#Remove items from Cart--------------------------#
+time.sleep(2)
+#----------------------------# Continue Shopping then re-Enter shopping cart--------------------------#
+#driver.find_element_by_id("covert2quote").click() #Convert to Quotation
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.CLASS_NAME, 'minicart-wrapper '))).click()
+WebDriverWait(driver,7).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT, 'VIEW CART'))).click()
+time.sleep(3)
+#----------------------------#Enter shopping cart--------------------------#
+time.sleep(2)
+#----------------------------Go to checkout--------------------------#
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/3)")
+time.sleep(8)
+driver.find_element_by_css_selector("button.btn-novetty.primary.checkout").click()
+time.sleep(2)
+#----------------------------Go to checkout--------------------------#
+time.sleep(2)
+#----------------------------#Billing & Shipping address the same--------------------------#
+time.sleep(2)
+driver.find_element_by_name("ecc_email").send_keys("pwillis@interactone.com")  #email
+#driver.find_element_by_id("pass").send_keys("DeadPool1234")
+time.sleep(2)
+driver.find_element_by_name("firstname").clear()
+driver.find_element_by_name("firstname").send_keys("Mando")
+driver.find_element_by_name("lastname").clear()
+driver.find_element_by_name("lastname").send_keys("willis")
+driver.find_element_by_name("street[0]").clear()
+driver.find_element_by_name("street[0]").send_keys("4665 Cornell rd STE 404")
+driver.find_element_by_name("city").clear()
+driver.find_element_by_name("city").send_keys("blue Ash")  #City
+driver.find_element_by_name("region_id").send_keys("Ohio")
+driver.find_element_by_name("postcode").clear()
+driver.find_element_by_name("postcode").send_keys("45241")
+driver.find_element_by_name("telephone").clear()
+driver.find_element_by_name("telephone").send_keys("1234567890")  #Phone Numbertime.sleep(5)
+time.sleep(4)
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+time.sleep(4)
+#----------------------------#Billing & Shipping address the same--------------------------#
+time.sleep(2)
+#----------------------------#Check the shipping methods and shipping amount--------------------------#
+time.sleep(4)
+driver.find_element_by_css_selector("button.button.action.continue.primary").click()
+time.sleep(2)
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/3)")
+#-------------------------------------------Shipping and Tax Math Check-------------------------------------------#
+SubT = driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/aside/div[2]/div/div/div[1]/table/tbody/tr[1]/td/span")
+New_SubT = float(SubT.text.replace('$',''))
+#print(New_SubT)
+Ship = driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/aside/div[2]/div/div/div[1]/table/tbody/tr[2]/td/span")
+New_Ship = float(Ship.text.replace('$',''))
+#print(Ship_Tax)
+Tax = driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/aside/div[2]/div/div/div[1]/table/tbody/tr[3]/td/span")
+New_Tax = float(Tax.text.replace('$',''))
+#print(New_Tax)
+Site2 = driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/aside/div[2]/div/div/div[1]/table/tbody/tr[4]/td/strong/span")
+New_Site2 = float(Site2.text.replace('$',''))
+num = []
+num.append(New_SubT)
+num.append(New_Ship)
+num.append(New_Tax)
+Total = New_SubT + New_Ship + New_Tax
+Total2 = float(Total.text.replace('$',''))
+print(num)
+print(f"{Total} is the total")
+if New_Site == New_Site2:
+    print(f"{New_Site} and {New_Site2} are the same")
+elif New_Site != New_Site2:
+    print(f"{New_Site} and {New_Site2} are not the same")
+time.sleep(6)
+#-------------------------------------------Shipping and Tax Math Check-------------------------------------------#
+time.sleep(6)
+#----------------------------#Check the tax calculation--------------------------#
+time.sleep(2)
+if Total == New_Site:
+    print(f"{Total} and {New_Site} are the same! Line 238")
+elif Total != New_Site:
+    print(f"{Total} and {New_Site} are not the same! Line 240")
+time.sleep(6)
+
+#----------------------------#Check the tax calculation--------------------------#
+time.sleep(4)
+#----------------------------#In payment step of chckout--------------------------#
+time.sleep(4)
+driver.find_element_by_id("billing-address-same-as-shipping-elements").click()
+time.sleep(2)
+print("Mulitple/Difference Addresses")
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/5)")
+time.sleep(2)
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/div[4]/div/input").send_keys("Mando")
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/div[5]/div/input").send_keys("willis")
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/fieldset/div/div[1]/div/input").send_keys("4665 Cornell rd STE 404")
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/div[7]/div/input").send_keys("blue Ash")  #City
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/div[8]/div/select").send_keys("Ohio")
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/div[10]/div/input").clear()
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/div[10]/div/input").send_keys("45241")
+driver.find_element_by_xpath("/html/body/div[2]/main/div/div/div/div[2]/div[2]/div[5]/ol/li[3]/div/form/fieldset/div[1]/div/div/div[3]/div[2]/div[3]/div/fieldset/div[2]/div/form/fieldset/div[12]/div/input").send_keys("1234567890")  #Phone Numbertime.sleep(5)
+time.sleep(4)
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight/2)")
+time.sleep(4)
+driver.find_element_by_css_selector("button.action.action-update").click()
+
+#----------------------------#Edit/add coupon--------------------------#
+time.sleep(2)
+#----------------------------#Edit/add coupon--------------------------#
+time.sleep(2)
+#driver.find_element_by_css_selector("button.action.primary.checkout").click()
+print("Completed Mulitple/Difference Addresses Checkout as a logged Cx")
+driver.close()
+#----------------------------#Check subtotal shipping tax and totals are correct--------------------------#
+time.sleep(2)
+#----------------------------#Check subtotal shipping tax and totals are correct--------------------------#
+time.sleep(2)
+#After Placed Order, verify it's correct in the admin
